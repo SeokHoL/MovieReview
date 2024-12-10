@@ -1,6 +1,5 @@
 package kr.ac.kopo.moviereview.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +22,4 @@ public class MovieImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
-
-
-
 }

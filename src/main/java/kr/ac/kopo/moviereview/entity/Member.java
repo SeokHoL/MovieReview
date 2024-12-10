@@ -1,5 +1,6 @@
 package kr.ac.kopo.moviereview.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,4 @@ public class Member extends BaseEntity{
     private String email;
     private String pw;
     private String nickname;
-
-
 }

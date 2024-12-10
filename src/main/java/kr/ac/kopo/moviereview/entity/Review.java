@@ -1,6 +1,5 @@
 package kr.ac.kopo.moviereview.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,8 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = {"movie", "member"})
-public class Review  extends  BaseEntity{
-
+public class Review extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewnum;
@@ -22,7 +20,7 @@ public class Review  extends  BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    private int grade;
+    private  int grade;
 
     private String text;
 

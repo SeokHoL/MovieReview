@@ -6,28 +6,23 @@ import kr.ac.kopo.moviereview.entity.Review;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootTest
 public class ReviewRepositoryTest {
-
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @Autowired MemberRepository memberRepository;
-
     @Test
     public void insertReview(){
-        IntStream.rangeClosed(1, 200).forEach(i ->{
-            //임의의 영화번호
-            Long mno = (long)(Math.random() * 100 ) + 1;
-
-            //임의의 회원번호
-            Long mid = (long)(Math.random() * 100) + 1 ;
+        IntStream.rangeClosed(1, 200).forEach(i -> {
+//            임의의 영화번호
+            Long mno = (long)(Math.random()*100) + 1;
+//            임의의 회원번호
+            Long mid = (long)(Math.random()*100) + 1;
 
             Member member = Member.builder()
                     .mid(mid)
@@ -37,7 +32,7 @@ public class ReviewRepositoryTest {
                     .mno(mno)
                     .build();
 
-            int grade =(int)(Math.random() * 5) + 1 ;
+            int grade = (int)(Math.random()*5) +1;
 
             Review review = Review.builder()
                     .member(member)
@@ -47,7 +42,6 @@ public class ReviewRepositoryTest {
                     .build();
 
             reviewRepository.save(review);
-
         });
     }
 
@@ -60,27 +54,13 @@ public class ReviewRepositoryTest {
         List<Review> result = reviewRepository.findByMovie(movie);
 
         result.forEach(review -> {
-            System.out.println(review.getReviewnum() + "\t");
-            System.out.println(review.getGrade() + "\t");
-            System.out.println(review.getText() + "\t");
-            System.out.println(review.getMember().getEmail() + "\t");
+            System.out.print(review.getReviewnum() + "\t");
+            System.out.print(review.getGrade() + "\t");
+            System.out.print(review.getText() + "\t");
+            System.out.print(review.getMember().getEmail() + "\t");
             System.out.println("-----------------------------------");
-
         });
     }
 
-    @Commit
-    @Transactional
-    @Test
-    public void testDeleteMember(){
 
-        Long mid = 1L;
-        Member member = Member.builder()
-                .mid(mid)
-                .build();
-
-        reviewRepository.deleteByMember(member);
-        memberRepository.deleteById(mid);
-
-    }
 }

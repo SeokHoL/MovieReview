@@ -17,7 +17,6 @@ import java.util.stream.IntStream;
 
 @SpringBootTest
 public class MovieRepositoryTest {
-
     @Autowired
     private MovieRepository movieRepository;
 
@@ -25,15 +24,15 @@ public class MovieRepositoryTest {
     private MovieImageRepository movieImageRepository;
 
     @Test
-    public void insertMovies(){
+    public  void insertMovies(){
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Movie movie = Movie.builder()
-                    .title("Movie Test" + i)
+                    .title("Movie Test " + i)
                     .build();
 
             movieRepository.save(movie);
 
-            int imgCount =(int)(Math.random()* 5) + 1;
+            int imgCount = (int)(Math.random() * 5) + 1;
 
             for (int j=0; j < imgCount; j++){
                 MovieImage movieImage = MovieImage.builder()
@@ -47,11 +46,11 @@ public class MovieRepositoryTest {
     }
 
     @Test
-    public void testListPage() {
+    public void testListPage(){
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "mno"));
         Page<Object[]> result = movieRepository.getListPage(pageRequest);
 
-        for (Object[] objects : result.getContent()) {
+        for (Object[] objects : result.getContent()){
             System.out.println("♥ " + Arrays.toString(objects));
         }
     }
@@ -62,10 +61,8 @@ public class MovieRepositoryTest {
 
         System.out.println(result);
 
-        for (Object[] arr: result){
+        for (Object[]  arr: result){
             System.out.println(Arrays.toString(arr));
-
         }
-
     }
 }
